@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "LeetCode Friends info",
+  "version": "1.0",
+  "description": "Add your friends username , and get info about you friend's leetcode profile info",
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "action" : {
+    "default_popup" : "index.html"
+  },
+  "content_scripts" : [{
+    "matches" : ["https://leetcode.com/u/*"],
+    "js" : ["content.js"]
+  }], 
+  "host_permissions" : ["https://leetcode.com/*"], 
+  "icons":{
+    "128" : "icon.png"
+  }
+  
+}
