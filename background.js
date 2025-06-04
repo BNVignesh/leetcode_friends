@@ -35,7 +35,7 @@ savedfriends.forEach(async (name) => {
         }
         
         friends.push(name)
-        
+
         const temp = document.createElement('div')
         temp.className = 'friend info'
 
@@ -69,7 +69,6 @@ addbutton.addEventListener('click', async () => {
     }
     
     
-    localStorage.setItem('friends', JSON.stringify(friends))
     
     const tab = await chrome.tabs.create({
         url : `https://leetcode.com/u/${name}`,
@@ -77,7 +76,7 @@ addbutton.addEventListener('click', async () => {
     })
     
     await new Promise(resolve => setTimeout(resolve, 2000))
-
+    
     await chrome.scripting.executeScript({
         target : {tabId : tab.id},
         files : ['content.js']
@@ -95,8 +94,10 @@ addbutton.addEventListener('click', async () => {
         if (total === '-' && rating == '-' ){
             return
         }
-
+        
         friends.push(name)
+        
+        localStorage.setItem('friends', JSON.stringify(friends))
 
         const temp = document.createElement('div')
         temp.className = 'friend info'
