@@ -8,7 +8,6 @@ const savedfriends = JSON.parse(localStorage.getItem('friends') || "[]")
 
 
 savedfriends.forEach(async (name) => {
-    friends.push(name)
 
     const tab = await chrome.tabs.create({
         url : `https://leetcode.com/u/${name}`,
@@ -27,9 +26,16 @@ savedfriends.forEach(async (name) => {
             body.innerHTML += `Failed to fetch ${name}'s data`
             return
         }
+
         
         const [total, rating] = response
-
+        
+        if (total === '-' && rating == '-' ){
+            return
+        }
+        
+        friends.push(name)
+        
         const temp = document.createElement('div')
         temp.className = 'friend info'
 
@@ -61,30 +67,36 @@ addbutton.addEventListener('click', async () => {
     if (friends.includes(name)){
         return
     }
-    friends.push(name)
-
-
+    
+    
     localStorage.setItem('friends', JSON.stringify(friends))
-
+    
     const tab = await chrome.tabs.create({
         url : `https://leetcode.com/u/${name}`,
         active : false
     })
-
+    
     await new Promise(resolve => setTimeout(resolve, 2000))
 
     await chrome.scripting.executeScript({
         target : {tabId : tab.id},
         files : ['content.js']
     })
-
+    
     chrome.tabs.sendMessage(tab.id, {action : "scrapeLeetCode"}, (response) => {
         if(!response || response.error){
             body.innerHTML += `Failed to fetch ${name}'s data`
             return
         }
         
+        
         const [total, rating] = response
+        
+        if (total === '-' && rating == '-' ){
+            return
+        }
+
+        friends.push(name)
 
         const temp = document.createElement('div')
         temp.className = 'friend info'

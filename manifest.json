@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "LeetCode Friends info",
   "version": "1.0",
-  "description": "Add your friends username , and get info about you friend's leetcode profile info",
+  "description": "Track your friends' LeetCode profiles easily! Add usernames and view total problems solved and contest ratings instantly. No logins, no tracking—just real-time data from LeetCode.",
   "permissions": ["storage", "activeTab", "scripting", "tabs"],
   "action" : {
     "default_popup" : "index.html"
