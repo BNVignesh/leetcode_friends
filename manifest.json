@@ -1,19 +1,26 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "LeetCode Friends info",
   "version": "1.0",
   "description": "Track your friends' LeetCode profiles easily! Add usernames and view total problems solved and contest ratings instantly. No logins, no tracking—just real-time data from LeetCode.",
-  "permissions": ["storage", "activeTab", "scripting", "tabs"],
-  "action" : {
-    "default_popup" : "index.html"
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "128": "icon.png"
+    }
   },
-  "content_scripts" : [{
-    "matches" : ["https://leetcode.com/u/*"],
-    "js" : ["content.js"]
-  }], 
-  "host_permissions" : ["https://leetcode.com/*"], 
-  "icons":{
-    "128" : "icon.png"
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://leetcode.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://leetcode.com/u/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "128": "icon.png"
   }
-  
 }
