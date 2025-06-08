@@ -16,7 +16,7 @@ savedfriends.forEach(async (name) => {
 
     await new Promise(resolve => setTimeout(resolve, 2000))
 
-    await chrome.scripting.executeScript({
+    await chrome.tabs.executeScript({
         target : {tabId : tab.id}, 
         files : ['content.js']
     })
@@ -77,7 +77,7 @@ addbutton.addEventListener('click', async () => {
     
     await new Promise(resolve => setTimeout(resolve, 2000))
     
-    await chrome.scripting.executeScript({
+    await chrome.tabs.executeScript({
         target : {tabId : tab.id},
         files : ['content.js']
     })
