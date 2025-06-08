@@ -9,19 +9,18 @@ const savedfriends = JSON.parse(localStorage.getItem('friends') || "[]")
 
 savedfriends.forEach(async (name) => {
 
-    const tab = await chrome.tabs.create({
+    const tab = await browser.tabs.create({
         url : `https://leetcode.com/u/${name}`,
         active : false
     })
 
     await new Promise(resolve => setTimeout(resolve, 2000))
 
-    await chrome.tabs.executeScript({
-        target : {tabId : tab.id}, 
-        files : ['content.js']
+    await browser.tabs.executeScript(tab.id, { 
+        file : 'content.js'
     })
 
-    chrome.tabs.sendMessage(tab.id, {action : "scrapeLeetCode"}, (response) => {
+    browser.tabs.sendMessage(tab.id, {action : "scrapeLeetCode"}, (response) => {
         if(!response || response.error){
             body.innerHTML += `Failed to fetch ${name}'s data`
             return
@@ -70,19 +69,18 @@ addbutton.addEventListener('click', async () => {
     
     
     
-    const tab = await chrome.tabs.create({
+    const tab = await browser.tabs.create({
         url : `https://leetcode.com/u/${name}`,
         active : false
     })
     
     await new Promise(resolve => setTimeout(resolve, 2000))
     
-    await chrome.tabs.executeScript({
-        target : {tabId : tab.id},
-        files : ['content.js']
+    await browser.tabs.executeScript(tab.id, {
+        file : 'content.js'
     })
     
-    chrome.tabs.sendMessage(tab.id, {action : "scrapeLeetCode"}, (response) => {
+    browser.tabs.sendMessage(tab.id, {action : "scrapeLeetCode"}, (response) => {
         if(!response || response.error){
             body.innerHTML += `Failed to fetch ${name}'s data`
             return
