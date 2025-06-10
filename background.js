@@ -55,7 +55,7 @@ savedfriends.forEach(async (name) => {
 
         body.append(temp)
         
-        chrome.tabs.remove(tab.id)
+        browser.tabs.remove(tab.id)
 
         
     })
@@ -117,7 +117,7 @@ addbutton.addEventListener('click', async () => {
         
         body.append(temp)
 
-        chrome.tabs.remove(tab.id)
+        browser.tabs.remove(tab.id)
         
         inputbox.value = ''
     })
